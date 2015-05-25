@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		9D6912321B10381000A0FE15 /* EkoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6912311B10381000A0FE15 /* EkoImage.swift */; };
 		9D6912341B10400D00A0FE15 /* ChannelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6912331B10400D00A0FE15 /* ChannelController.swift */; };
-		9D6912381B10434200A0FE15 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6912351B10434200A0FE15 /* Alamofire.swift */; };
-		9D6912391B10434200A0FE15 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6912361B10434200A0FE15 /* HRToast+UIView.swift */; };
-		9D69123A1B10434200A0FE15 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6912371B10434200A0FE15 /* SwiftyJSON.swift */; };
 		9D69123C1B10442D00A0FE15 /* HttpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69123B1B10442D00A0FE15 /* HttpController.swift */; };
 		9DB6F4E41B0B73530055647A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6F4E31B0B73530055647A /* AppDelegate.swift */; };
 		9DB6F4E61B0B73530055647A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6F4E51B0B73530055647A /* ViewController.swift */; };
@@ -19,6 +16,9 @@
 		9DB6F4EB1B0B73530055647A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6F4EA1B0B73530055647A /* Images.xcassets */; };
 		9DB6F4EE1B0B73530055647A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6F4EC1B0B73530055647A /* LaunchScreen.xib */; };
 		9DB6F4FA1B0B73530055647A /* dbfmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB6F4F91B0B73530055647A /* dbfmTests.swift */; };
+		9DD730851B13720200A2B855 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730821B13720200A2B855 /* Alamofire.swift */; };
+		9DD730861B13720200A2B855 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730831B13720200A2B855 /* HRToast+UIView.swift */; };
+		9DD730871B13720200A2B855 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730841B13720200A2B855 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +34,6 @@
 /* Begin PBXFileReference section */
 		9D6912311B10381000A0FE15 /* EkoImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkoImage.swift; sourceTree = "<group>"; };
 		9D6912331B10400D00A0FE15 /* ChannelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelController.swift; sourceTree = "<group>"; };
-		9D6912351B10434200A0FE15 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = "../../../../Downloads/老镇讲堂-项目文件-素材/豆瓣电台-iPhone版/第三方库/Alamofire.swift"; sourceTree = "<group>"; };
-		9D6912361B10434200A0FE15 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HRToast+UIView.swift"; path = "../../../../Downloads/老镇讲堂-项目文件-素材/豆瓣电台-iPhone版/第三方库/HRToast+UIView.swift"; sourceTree = "<group>"; };
-		9D6912371B10434200A0FE15 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../Downloads/老镇讲堂-项目文件-素材/豆瓣电台-iPhone版/第三方库/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		9D69123B1B10442D00A0FE15 /* HttpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpController.swift; sourceTree = "<group>"; };
 		9DB6F4DE1B0B73530055647A /* dbfm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dbfm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB6F4E21B0B73530055647A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +45,9 @@
 		9DB6F4F31B0B73530055647A /* dbfmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dbfmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB6F4F81B0B73530055647A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DB6F4F91B0B73530055647A /* dbfmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbfmTests.swift; sourceTree = "<group>"; };
+		9DD730821B13720200A2B855 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		9DD730831B13720200A2B855 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
+		9DD730841B13720200A2B855 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9DD785201B0CCAC100D7469D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,10 +93,10 @@
 				9DB6F4E31B0B73530055647A /* AppDelegate.swift */,
 				9DB6F4E51B0B73530055647A /* ViewController.swift */,
 				9D69123B1B10442D00A0FE15 /* HttpController.swift */,
+				9DD730821B13720200A2B855 /* Alamofire.swift */,
+				9DD730831B13720200A2B855 /* HRToast+UIView.swift */,
+				9DD730841B13720200A2B855 /* SwiftyJSON.swift */,
 				9DB6F4E71B0B73530055647A /* Main.storyboard */,
-				9D6912351B10434200A0FE15 /* Alamofire.swift */,
-				9D6912361B10434200A0FE15 /* HRToast+UIView.swift */,
-				9D6912371B10434200A0FE15 /* SwiftyJSON.swift */,
 				9D6912331B10400D00A0FE15 /* ChannelController.swift */,
 				9D6912311B10381000A0FE15 /* EkoImage.swift */,
 				9DB6F4EA1B0B73530055647A /* Images.xcassets */,
@@ -232,14 +232,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DD730851B13720200A2B855 /* Alamofire.swift in Sources */,
 				9D6912321B10381000A0FE15 /* EkoImage.swift in Sources */,
-				9D6912381B10434200A0FE15 /* Alamofire.swift in Sources */,
-				9D6912391B10434200A0FE15 /* HRToast+UIView.swift in Sources */,
 				9D69123C1B10442D00A0FE15 /* HttpController.swift in Sources */,
+				9DD730871B13720200A2B855 /* SwiftyJSON.swift in Sources */,
 				9DB6F4E61B0B73530055647A /* ViewController.swift in Sources */,
 				9DB6F4E41B0B73530055647A /* AppDelegate.swift in Sources */,
-				9D69123A1B10434200A0FE15 /* SwiftyJSON.swift in Sources */,
 				9D6912341B10400D00A0FE15 /* ChannelController.swift in Sources */,
+				9DD730861B13720200A2B855 /* HRToast+UIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
