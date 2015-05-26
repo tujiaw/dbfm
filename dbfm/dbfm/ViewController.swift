@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var progress: UIImageView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var orderButton: OrderButton!
     
     
     var httpCtrl = HttpController()
@@ -195,6 +196,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tv.selectRowAtIndexPath(prevIndexPath, animated: true, scrollPosition: .Top)
         playMusic(getSongData(fromRow: currentIndex, andKey: "url")!)
     }
+    
+    @IBAction func orderClicked(sender: AnyObject) {
+        var tips = ["顺序播放", "随机播放", "单曲循环", "error"]
+        self.view.makeToast(message: tips[self.orderButton.order], duration: 0.5, position: "center")
+    }
+    
     
 }
 

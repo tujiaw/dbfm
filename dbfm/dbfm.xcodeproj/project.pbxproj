@@ -19,6 +19,7 @@
 		9DD730851B13720200A2B855 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730821B13720200A2B855 /* Alamofire.swift */; };
 		9DD730861B13720200A2B855 /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730831B13720200A2B855 /* HRToast+UIView.swift */; };
 		9DD730871B13720200A2B855 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730841B13720200A2B855 /* SwiftyJSON.swift */; };
+		9DD730891B14B9D200A2B855 /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD730881B14B9D200A2B855 /* OrderButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		9DD730821B13720200A2B855 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		9DD730831B13720200A2B855 /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
 		9DD730841B13720200A2B855 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		9DD730881B14B9D200A2B855 /* OrderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderButton.swift; sourceTree = "<group>"; };
 		9DD785201B0CCAC100D7469D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 			children = (
 				9DB6F4E31B0B73530055647A /* AppDelegate.swift */,
 				9DB6F4E51B0B73530055647A /* ViewController.swift */,
+				9DD730881B14B9D200A2B855 /* OrderButton.swift */,
 				9D69123B1B10442D00A0FE15 /* HttpController.swift */,
 				9DD730821B13720200A2B855 /* Alamofire.swift */,
 				9DD730831B13720200A2B855 /* HRToast+UIView.swift */,
@@ -236,6 +239,7 @@
 				9D6912321B10381000A0FE15 /* EkoImage.swift in Sources */,
 				9D69123C1B10442D00A0FE15 /* HttpController.swift in Sources */,
 				9DD730871B13720200A2B855 /* SwiftyJSON.swift in Sources */,
+				9DD730891B14B9D200A2B855 /* OrderButton.swift in Sources */,
 				9DB6F4E61B0B73530055647A /* ViewController.swift in Sources */,
 				9DB6F4E41B0B73530055647A /* AppDelegate.swift in Sources */,
 				9D6912341B10400D00A0FE15 /* ChannelController.swift in Sources */,
