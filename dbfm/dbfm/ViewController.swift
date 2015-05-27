@@ -160,22 +160,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func playMusic(row: Int) {
         println("current:\(self.audioPlayer.currentPlaybackTime)")
         println("total:\(self.audioPlayer.duration)")
-
-        if self.audioPlayer.currentPlaybackTime.isNaN {
-            println("current play back time is nan")
-            return
-        }
-        
-        if self.audioPlayer.duration.isNaN {
-            println("duration is nan")
-            return
-        }
         
         isAutoFinished = true
-        let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
-        let totalSecond = Int(self.audioPlayer.duration)
-        if currentSecond != totalSecond {
-            isAutoFinished = false
+        if !(self.audioPlayer.currentPlaybackTime.isNaN || self.audioPlayer.duration.isNaN) {
+            let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
+            let totalSecond = Int(self.audioPlayer.duration)
+            if currentSecond != totalSecond {
+                isAutoFinished = false
+            }
         }
         
         isPlay = true
