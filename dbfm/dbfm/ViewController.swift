@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var imageCount = 0
     var currentIndex = 0
     var isPlay = false
+    var isAutoFinished = false
     
     let audioPlayer = MPMoviePlayerController()
     
@@ -48,6 +49,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tv.delegate = self
         // 透明
         tv.backgroundColor = UIColor.clearColor()
+        // 监听播放结束
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onPlayFinished", name: MPMoviePlayerPlaybackDidFinishNotification, object: audioPlayer)
         
         httpCtrl.delegate = self
         httpCtrl.onSearch("http://www.douban.com/j/app/radio/channels")
@@ -82,6 +85,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tv.reloadData()
     }
     
+    func onPlayFinished() {
+        if isAutoFinished == false {
+            return
+        }
+        
+        switch self.orderButton.order {
+        case 1: // 顺序播放
+            ++currentIndex
+            if currentIndex >= songData.count {
+                currentIndex = 0
+            }
+            playMusic(currentIndex)
+        case 2: // 随机播放
+            currentIndex = random() % songData.count
+            playMusic(currentIndex)
+        case 3: // 单曲循环
+            playMusic(currentIndex)
+        default:
+            println("onPlayFinished order error!")
+        }
+    }
+    
     func getSongData(fromRow row: Int, andKey key: String) -> String? {
         let rowData = self.songData[row] as JSON
         return rowData[key].string
@@ -90,9 +115,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         currentIndex = indexPath.row
         setBackgroundImage(fromSelectedRow: indexPath.row)
-        if let url = getSongData(fromRow: indexPath.row, andKey: "url") {
-            playMusic(url)
-        }
+        playMusic(currentIndex)
     }
     
     func setBackgroundImage(fromSelectedRow row: Int) {
@@ -134,12 +157,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         httpCtrl.onSearch(url)
     }
     
-    func playMusic(url: String) {
+    func playMusic(row: Int) {
+        println("current:\(self.audioPlayer.currentPlaybackTime)")
+        println("total:\(self.audioPlayer.duration)")
+
+        isAutoFinished = true
+        if self.audioPlayer.currentPlaybackTime > 0 {
+            let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
+            let totalSecond = Int(self.audioPlayer.duration)
+            if currentSecond != totalSecond {
+                isAutoFinished = false
+            }
+        }
+        
         isPlay = true
         playButton.setImage(UIImage(named: "pause"), forState: .Normal)
+        setBackgroundImage(fromSelectedRow: row)
+        
+        let prevIndexPath = NSIndexPath(forRow: row, inSection: 0)
+        tv.selectRowAtIndexPath(prevIndexPath, animated: true, scrollPosition: .Top)
         
         self.audioPlayer.stop()
-        self.audioPlayer.contentURL = NSURL(string: url)
+        self.audioPlayer.contentURL = NSURL(string: getSongData(fromRow: row, andKey: "url")!)
         self.audioPlayer.play()
         timer?.invalidate()
         timeLabel.text = "00:00"
@@ -147,6 +186,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func onTimer() {
+        
         let time = audioPlayer.currentPlaybackTime
         if time > 0.0 {
             let intTime = Int(time)
@@ -180,10 +220,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if currentIndex >= songData.count {
             currentIndex = 0
         }
-        
-        let nextIndexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
-        tv.selectRowAtIndexPath(nextIndexPath, animated: true, scrollPosition: .Top)
-        playMusic(getSongData(fromRow: currentIndex, andKey: "url")!)
+        playMusic(currentIndex)
     }
     
     @IBAction func prevClicked(sender: AnyObject) {
@@ -191,14 +228,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if currentIndex < 0 {
             currentIndex = songData.count - 1
         }
-        
-        let prevIndexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
-        tv.selectRowAtIndexPath(prevIndexPath, animated: true, scrollPosition: .Top)
-        playMusic(getSongData(fromRow: currentIndex, andKey: "url")!)
+        playMusic(currentIndex)
     }
     
     @IBAction func orderClicked(sender: AnyObject) {
-        var tips = ["顺序播放", "随机播放", "单曲循环", "error"]
+        var tips = ["error", "顺序播放", "随机播放", "单曲循环", "error"]
         self.view.makeToast(message: tips[self.orderButton.order], duration: 0.5, position: "center")
     }
     

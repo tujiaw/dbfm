@@ -377,7 +377,6 @@ extension UIView {
 }
 
 extension String {
-    
     func stringHeightWithFontSize(fontSize: CGFloat,width: CGFloat) -> CGFloat {
         var font = UIFont.systemFontOfSize(fontSize)
         var size = CGSizeMake(width, CGFloat.max)

@@ -22,6 +22,9 @@ class OrderButton: UIButton {
     
     func onClicked(sender: UIButton) {
         ++order
+        if order > 3 {
+            order = 1
+        }
         switch order {
         case 1:
             self.setImage(order1, forState: .Normal)
@@ -29,7 +32,6 @@ class OrderButton: UIButton {
             self.setImage(order2, forState: .Normal)
         case 3:
             self.setImage(order3, forState: .Normal)
-            order = 1
         default:
             println("order error!")
         }
