@@ -196,14 +196,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func onTimer() {
         
         let time = audioPlayer.currentPlaybackTime
-        if time > 0.0 {
+        let totalTime = audioPlayer.duration
+        if time > 0.0 && totalTime > 0{
             let intTime = Int(time)
             let minute = intTime / 60
             let second = intTime % 60
             let formatTime = String("\(minute):\(second)")
             timeLabel.text = NSString(format: "%02d:%02d", minute, second) as String
             
-            let totalTime = audioPlayer.duration
             let percentage = CGFloat(time / totalTime)
             progress.frame.size.width = view.frame.size.width * percentage
         } else {
