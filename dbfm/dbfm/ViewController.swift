@@ -91,16 +91,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         switch self.orderButton.order {
-        case 1: // 顺序播放
+        case Order.Sequence: // 顺序播放
             ++currentIndex
             if currentIndex >= songData.count {
                 currentIndex = 0
             }
             playMusic(currentIndex)
-        case 2: // 随机播放
+        case Order.Random: // 随机播放
             currentIndex = random() % songData.count
             playMusic(currentIndex)
-        case 3: // 单曲循环
+        case Order.Cycle: // 单曲循环
             playMusic(currentIndex)
         default:
             println("onPlayFinished order error!")
@@ -161,13 +161,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         println("current:\(self.audioPlayer.currentPlaybackTime)")
         println("total:\(self.audioPlayer.duration)")
 
+        if self.audioPlayer.currentPlaybackTime.isNaN {
+            println("current play back time is nan")
+            return
+        }
+        
+        if self.audioPlayer.duration.isNaN {
+            println("duration is nan")
+            return
+        }
+        
         isAutoFinished = true
-        if self.audioPlayer.currentPlaybackTime > 0 {
-            let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
-            let totalSecond = Int(self.audioPlayer.duration)
-            if currentSecond != totalSecond {
-                isAutoFinished = false
-            }
+        let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
+        let totalSecond = Int(self.audioPlayer.duration)
+        if currentSecond != totalSecond {
+            isAutoFinished = false
         }
         
         isPlay = true
@@ -233,7 +241,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func orderClicked(sender: AnyObject) {
         var tips = ["error", "顺序播放", "随机播放", "单曲循环", "error"]
-        self.view.makeToast(message: tips[self.orderButton.order], duration: 0.5, position: "center")
+        self.view.makeToast(message: tips[self.orderButton.order.rawValue], duration: 0.5, position: "center")
     }
     
     

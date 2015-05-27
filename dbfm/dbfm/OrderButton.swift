@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum Order: Int {
+    case Sequence = 1
+    case Random
+    case Cycle
+    case Unknown
+}
+
 class OrderButton: UIButton {
-    var order: Int = 1
+    var order = Order.Sequence
     
     let order1 = UIImage(named: "order1")!
     let order2 = UIImage(named: "order2")!
@@ -21,17 +28,16 @@ class OrderButton: UIButton {
     }
     
     func onClicked(sender: UIButton) {
-        ++order
-        if order > 3 {
-            order = 1
-        }
         switch order {
-        case 1:
-            self.setImage(order1, forState: .Normal)
-        case 2:
+        case Order.Sequence:
+            order = Order.Random
             self.setImage(order2, forState: .Normal)
-        case 3:
+        case Order.Random:
+            order = Order.Cycle
             self.setImage(order3, forState: .Normal)
+        case Order.Cycle:
+            order = Order.Sequence
+            self.setImage(order1, forState: .Normal)
         default:
             println("order error!")
         }
