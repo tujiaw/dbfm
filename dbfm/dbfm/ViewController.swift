@@ -84,7 +84,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func onPlayFinished() {
-        println("on play finished 111")
         switch self.orderButton.order {
         case Order.Sequence: // 顺序播放
             ++currentIndex
@@ -153,8 +152,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func playMusic(row: Int) {
-        println("playMusic")
-
         playButton.setImage(UIImage(named: "pause"), forState: .Normal)
         setBackgroundImage(fromSelectedRow: row)
         
