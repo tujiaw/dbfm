@@ -27,8 +27,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var imageChache: [String:UIImage] = [:]
     var imageCount = 0
     var currentIndex = 0
-    var isPlay = false
-    var isAutoFinished = false
     
     let audioPlayer = MPMoviePlayerController()
     
@@ -86,10 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func onPlayFinished() {
-        if isAutoFinished == false {
-            return
-        }
-        
+        println("on play finished 111")
         switch self.orderButton.order {
         case Order.Sequence: // 顺序播放
             ++currentIndex
@@ -158,26 +153,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func playMusic(row: Int) {
-        println("current:\(self.audioPlayer.currentPlaybackTime)")
-        println("total:\(self.audioPlayer.duration)")
-        
-        isAutoFinished = true
-        if !(self.audioPlayer.currentPlaybackTime.isNaN || self.audioPlayer.duration.isNaN) {
-            let currentSecond = Int(self.audioPlayer.currentPlaybackTime)
-            let totalSecond = Int(self.audioPlayer.duration)
-            if currentSecond != totalSecond {
-                isAutoFinished = false
-            }
-        }
-        
-        isPlay = true
+        println("playMusic")
+
         playButton.setImage(UIImage(named: "pause"), forState: .Normal)
         setBackgroundImage(fromSelectedRow: row)
         
         let prevIndexPath = NSIndexPath(forRow: row, inSection: 0)
         tv.selectRowAtIndexPath(prevIndexPath, animated: true, scrollPosition: .Top)
         
-        self.audioPlayer.stop()
         self.audioPlayer.contentURL = NSURL(string: getSongData(fromRow: row, andKey: "url")!)
         self.audioPlayer.play()
         timer?.invalidate()
@@ -205,13 +188,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     /////////////////////////////
     @IBAction func playClicked(sender: AnyObject) {
-        isPlay = !isPlay
-        if isPlay {
-            playButton.setImage(UIImage(named: "pause"), forState: .Normal)
-            self.audioPlayer.play()
-        } else {
+        if self.audioPlayer.playbackState == MPMoviePlaybackState.Playing {
             playButton.setImage(UIImage(named: "play"), forState: .Normal)
             self.audioPlayer.pause()
+        } else {
+            playButton.setImage(UIImage(named: "pause"), forState: .Normal)
+            self.audioPlayer.play()
+
         }
     }
     
