@@ -27,10 +27,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var imageChache: [String:UIImage] = [:]
     var imageCount = 0
     var currentIndex = 0
+    var currentChannelNumber = "0"
     
     let audioPlayer = MPMoviePlayerController()
     
     var timer:NSTimer?
+    
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +50,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tv.delegate = self
         // 透明
         tv.backgroundColor = UIColor.clearColor()
+        // 下拉刷新
+        refreshControl.addTarget(self, action: "downDragRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "下拉刷新")
+        tv.addSubview(refreshControl)
+        
         // 监听播放结束
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onPlayFinished", name: MPMoviePlayerPlaybackDidFinishNotification, object: audioPlayer)
         
         httpCtrl.delegate = self
         httpCtrl.onSearch("http://www.douban.com/j/app/radio/channels")
         httpCtrl.onSearch("http://douban.fm/j/mine/playlist?type=n&channel=0&from=mainsite")
+        httpCtrl.searchLyric("http://s.geci.me/lrc/215/21513/2151300.lrc")
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,12 +82,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    func downDragRefresh() {
+        onChannelChanged(currentChannelNumber)
+        self.refreshControl.endRefreshing()
+    }
+    
     func onReceiveResults(results: AnyObject) {
         let json = JSON(results)
         if let channels = json["channels"].array {
             self.channelData = channels
+            //println(channels)
         } else if let song = json["song"].array {
             self.songData = song
+            //println(song)
         }
         self.tv.reloadData()
     }
@@ -147,6 +163,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func onChannelChanged(number: String) {
+        currentChannelNumber = number
         let url = "http://douban.fm/j/mine/playlist?type=n&channel=\(number)&from=mainsite"
         httpCtrl.onSearch(url)
     }
@@ -163,6 +180,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         timer?.invalidate()
         timeLabel.text = "00:00"
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "onTimer", userInfo: nil, repeats: true)
+        
+        let songName = getSongData(fromRow: row, andKey: "title")
+        let songArtist = getSongData(fromRow: row, andKey: "artist")
+        Lyc.manager.cacheLyc(songName!, artist: songArtist!)
     }
     
     func onTimer() {
@@ -215,7 +236,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var tips = ["error", "顺序播放", "随机播放", "单曲循环", "error"]
         self.view.makeToast(message: tips[self.orderButton.order.rawValue], duration: 0.5, position: "center")
     }
-    
     
 }
 
