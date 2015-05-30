@@ -2,6 +2,7 @@ println("hi there")
 //Runs automatically. Just start typing.
 //See "About" for shortcuts
 
+
 extension String {
     func substr(pos: Int, len: Int = 0) -> String {
         if pos + len > countElements(self) {
@@ -54,6 +55,7 @@ struct Lyric {
     init(data: String) {
         let arr = data.split("\r\n")
         for (index, str) in enumerate(arr) {
+            var notFind = false
             if index < 4 {
                 let num = countElements(str) - 5
                 if str.find("ti:") != nil {
@@ -64,11 +66,19 @@ struct Lyric {
                     al = (num <= 0) ? "" : str.substr(4, len: num)
                 } else if str.find("by:") != nil {
                     by = (num <= 0) ? "" : str.substr(4, len: num)
+                } else {
+                    notFind = true
                 }
             } else {
-                let key = str.substr(1, len: 8)
-                let value = str.substr(10)
-                content[key] = value
+                notFind = true
+            }
+            
+            if notFind {
+                if str.find("[") != nil && str.find("]") != nil {
+                    let key = str.substr(1, len: 8)
+                    let value = str.substr(10)
+                    content[key] = value   
+                }
             }
         }
     }
@@ -84,5 +94,3 @@ let y = x.getContent(minute: 0, second: 39)
 for (time, content) in x.content {
     println("\(time), \(content)")
 }
-
-
