@@ -98,9 +98,9 @@ class Lyric {
                         }
                     }
                 } else {
-                    key = key.substr(0, len: 5)
-                    if !key.isEmpty {
-                        content[key] = value
+                    let tm = key.substr(0, len: 5)
+                    if !tm.isEmpty {
+                        content[tm] = value
                     }
                 }
             }
@@ -125,25 +125,21 @@ class LyricManager {
     
     func cacheLyc(song: String, artist: String) {
         current = nil
-        var url = ""
-        
-        var searchSong = song
-        var pos1 = song.find("(")
-        var pos2 = song.find("（")
-        if pos1 != nil {
-            searchSong = song.substr(0, len: pos1!)
-        } else if pos2 != nil {
-            searchSong = song.substr(0, len: pos2!)
+
+        let specialHandle = { (str: String) -> String in
+            var result = str
+            for (i, a) in enumerate(str) {
+                if a == "(" || a == "（" || a == "&" || a == "/" {
+                    result = str.substr(0, len: i)
+                    break
+                }
+            }
+            return result.trimmed()
         }
         
-        searchSong = searchSong.trimmed()
-        if artist.find("/") != nil || artist.find("&") != nil {
-            url = "http://geci.me/api/lyric/\(searchSong)"
-        } else {
-            let searchArtist = artist.trimmed()
-            url = "http://geci.me/api/lyric/\(searchSong)/\(searchArtist)"
-        }
-        
+        let searchSong = specialHandle(song)
+        let searchArtist = specialHandle(artist)
+        let url = "http://geci.me/api/lyric/\(searchSong)/\(searchArtist)"
         println("url:\(url)")
         let utf8url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         if utf8url == nil {
