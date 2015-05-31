@@ -20,7 +20,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var orderButton: OrderButton!
     @IBOutlet weak var lyricLabel: UILabel!
     
-    
     var httpCtrl = HttpController()
     var songData: [JSON] = []
     var channelData: [JSON] = []
@@ -31,9 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var currentChannelNumber = "0"
     
     let audioPlayer = MPMoviePlayerController()
-    
     var timer:NSTimer?
-    
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -182,6 +179,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.audioPlayer.contentURL = NSURL(string: getSongData(fromRow: row, andKey: "url")!)
         self.audioPlayer.play()
+        
         timer?.invalidate()
         timeLabel.text = "00:00"
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "onTimer", userInfo: nil, repeats: true)

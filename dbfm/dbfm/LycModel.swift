@@ -125,8 +125,8 @@ class LyricManager {
     
     func cacheLyc(song: String, artist: String) {
         current = nil
-
-        let specialHandle = { (str: String) -> String in
+        let specialHandle = {
+            (str: String) -> String in
             var result = str
             for (i, a) in enumerate(str) {
                 if a == "(" || a == "（" || a == "&" || a == "/" {
