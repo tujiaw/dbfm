@@ -184,6 +184,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let songName = getSongData(fromRow: row, andKey: "title")
         let songArtist = getSongData(fromRow: row, andKey: "artist")
+        lyricLabel.text = ""
         LyricManager.instance.cacheLyc(songName!, artist: songArtist!)
     }
     
