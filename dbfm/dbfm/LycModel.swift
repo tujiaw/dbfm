@@ -80,15 +80,13 @@ class Lyric {
                 var start = str.find("[")
                 var end = str.findLast("]")
                 if start == nil || end == nil {
-                    println("111")
-                    return
+                    continue
                 }
                 
                 var key = str.substr(1, len: end! - 1)
                 var value = str.substr(end! + 1)
                 if count(key) < 8 {
-                    println("222")
-                    return
+                    continue
                 }
                 
                 if key.find("][") != nil {
@@ -131,7 +129,7 @@ class LyricManager {
         current = nil
         var url = ""
         
-        var searchSong = ""
+        var searchSong = song
         var pos1 = song.find("(")
         var pos2 = song.find("（")
         if pos1 != nil {
@@ -140,10 +138,12 @@ class LyricManager {
             searchSong = song.substr(0, len: pos2!)
         }
         
+        searchSong = searchSong.trimmed()
         if artist.find("/") != nil || artist.find("&") != nil {
             url = "http://geci.me/api/lyric/\(searchSong)"
         } else {
-            url = "http://geci.me/api/lyric/\(searchSong)/\(artist)"
+            let searchArtist = artist.trimmed()
+            url = "http://geci.me/api/lyric/\(searchSong)/\(searchArtist)"
         }
         
         println("url:\(url)")
