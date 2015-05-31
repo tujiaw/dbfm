@@ -12,9 +12,15 @@ class HttpController : NSObject {
     var delegate: HttpProtocol?
     
     func onSearch(url: String) {
-        Alamofire.manager.request(Method.GET, url).responseJSON(options: NSJSONReadingOptions.MutableContainers, completionHandler: {(_, _, data, error) in self.delegate?.onReceiveResults(data!)})
+        Alamofire.manager.request(Method.GET, url).responseJSON(options: NSJSONReadingOptions.MutableContainers, completionHandler: {
+            (_, _, data, error) in
+            if data != nil {
+                self.delegate?.onReceiveResults(data!)
+            }
+        })
     }
 }
+
 // 定义http协议
 protocol HttpProtocol {
     func onReceiveResults(results: AnyObject)

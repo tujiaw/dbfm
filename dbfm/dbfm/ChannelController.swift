@@ -39,6 +39,12 @@ class ChannelController: UIViewController {
         let number = rowData["channel_id"].stringValue
         self.delegate?.onChannelChanged(number)
         self.dismissViewControllerAnimated(true, completion: nil)
-        
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1.0)
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            cell.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+        })
     }
 }

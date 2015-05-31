@@ -82,6 +82,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1.0)
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            cell.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+        })
+    }
+    
     func downDragRefresh() {
         onChannelChanged(currentChannelNumber)
         self.refreshControl.endRefreshing()
