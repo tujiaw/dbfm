@@ -123,12 +123,12 @@ class LyricManager {
         return Static.instance
     }
     
-    var data: [String:Lyric] = [:]
     var current: Lyric?
     
     func cacheLyc(song: String, artist: String) {
         current = nil
         let url = "http://geci.me/api/lyric/\(song)/\(artist)"
+        println("url:\(url)")
         let utf8url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         if utf8url == nil {
             return
@@ -148,9 +148,6 @@ class LyricManager {
             for item in result! {
                 let lrc = item["lrc"].string
                 if lrc != nil {
-                    if self.data.indexForKey(lrc!) != nil {
-                        break
-                    }
                     self.cacheLyc(lrc!)
                     break
                 }
@@ -159,12 +156,10 @@ class LyricManager {
     }
     
     func cacheLyc(url: String) {
-        if data.indexForKey(url) == nil {
-            Alamofire.manager.request(.GET, url, parameters: nil).responseString(encoding:NSUTF8StringEncoding, completionHandler: {
-                (request, response, data, error) in
-                let url = request.URL?.absoluteString
-                self.current = Lyric(data: data!)
-            })
-        }
+        Alamofire.manager.request(.GET, url, parameters: nil).responseString(encoding:NSUTF8StringEncoding, completionHandler: {
+            (request, response, data, error) in
+            let url = request.URL?.absoluteString
+            self.current = Lyric(data: data!)
+        })
     }
 }
