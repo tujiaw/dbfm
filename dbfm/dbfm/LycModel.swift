@@ -85,18 +85,16 @@ class Lyric {
                 
                 var key = str.substr(1, len: end! - 1)
                 var value = str.substr(end! + 1)
-                if count(key) < 8 {
+                if count(key) < 5 {
                     continue
                 }
                 
                 if key.find("][") != nil {
                     let keys = key.split("][")
                     for item in keys {
-                        if count(item) >= 8 {
-                            let tm = item.substr(0, len: 5)
-                            if !tm.isEmpty {
-                                content[tm] = value
-                            }
+                        let tm = item.substr(0, len: 5)
+                        if !tm.isEmpty {
+                            content[tm] = value
                         }
                     }
                 } else {

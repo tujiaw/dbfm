@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // 开始旋转
-        iv.onRotation()
+        self.iv.startRotate()
         // 背景模糊
         let blurEffect = UIBlurEffect(style: .Light)
         let blurView = UIVisualEffectView(effect: blurEffect)
@@ -216,7 +216,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             playButton.setImage(UIImage(named: "pause"), forState: .Normal)
             self.audioPlayer.play()
-
         }
     }
     

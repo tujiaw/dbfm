@@ -9,6 +9,8 @@
 import UIKit
 
 class EkoImage: UIImageView {
+    let animationName = "transform.rotation"
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -21,12 +23,16 @@ class EkoImage: UIImageView {
         self.layer.borderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.7).CGColor
     }
     
-    func onRotation() {
-        var animation = CABasicAnimation(keyPath: "transform.rotation")
+    func startRotate() {
+        var animation = CABasicAnimation(keyPath: animationName)
         animation.fromValue = 0.0
         animation.toValue = M_PI * 2.0
         animation.duration = 20
         animation.repeatCount = 10000
         self.layer.addAnimation(animation, forKey: nil)
+    }
+    
+    func stopRotate() {
+        
     }
 }
