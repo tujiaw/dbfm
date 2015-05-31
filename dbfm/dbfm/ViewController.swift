@@ -62,7 +62,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         httpCtrl.delegate = self
         httpCtrl.onSearch("http://www.douban.com/j/app/radio/channels")
         httpCtrl.onSearch("http://douban.fm/j/mine/playlist?type=n&channel=0&from=mainsite")
-        httpCtrl.searchLyric("http://s.geci.me/lrc/215/21513/2151300.lrc")
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,10 +91,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let json = JSON(results)
         if let channels = json["channels"].array {
             self.channelData = channels
-            //println(channels)
         } else if let song = json["song"].array {
             self.songData = song
-            //println(song)
         }
         self.tv.reloadData()
     }

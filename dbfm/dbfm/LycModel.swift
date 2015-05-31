@@ -80,12 +80,14 @@ class Lyric {
                 var start = str.find("[")
                 var end = str.findLast("]")
                 if start == nil || end == nil {
+                    println("111")
                     return
                 }
                 
                 var key = str.substr(1, len: end! - 1)
                 var value = str.substr(end! + 1)
                 if count(key) < 8 {
+                    println("222")
                     return
                 }
                 
@@ -127,7 +129,12 @@ class LyricManager {
     
     func cacheLyc(song: String, artist: String) {
         current = nil
-        let url = "http://geci.me/api/lyric/\(song)/\(artist)"
+        var url = ""
+        if artist.find("/") != nil || artist.find("&") != nil {
+            url = "http://geci.me/api/lyric/\(song)"
+        } else {
+            url = "http://geci.me/api/lyric/\(song)/\(artist)"
+        }
         println("url:\(url)")
         let utf8url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         if utf8url == nil {
@@ -159,7 +166,10 @@ class LyricManager {
         Alamofire.manager.request(.GET, url, parameters: nil).responseString(encoding:NSUTF8StringEncoding, completionHandler: {
             (request, response, data, error) in
             let url = request.URL?.absoluteString
-            self.current = Lyric(data: data!)
+            if data != nil {
+                println(data!)
+                self.current = Lyric(data: data!)
+            }
         })
     }
 }
