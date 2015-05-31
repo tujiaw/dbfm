@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		9D630A261B18D4BB00481121 /* LycModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LycModel.swift; sourceTree = "<group>"; };
+		9D630A281B1B098100481121 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		9D6912311B10381000A0FE15 /* EkoImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EkoImage.swift; sourceTree = "<group>"; };
 		9D6912331B10400D00A0FE15 /* ChannelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelController.swift; sourceTree = "<group>"; };
 		9D69123B1B10442D00A0FE15 /* HttpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpController.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		9DB6F4D51B0B73530055647A = {
 			isa = PBXGroup;
 			children = (
+				9D630A281B1B098100481121 /* MyPlayground.playground */,
 				9DB6F4E01B0B73530055647A /* dbfm */,
 				9DB6F4F61B0B73530055647A /* dbfmTests */,
 				9DB6F4DF1B0B73530055647A /* Products */,
