@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var progress: UIImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var orderButton: OrderButton!
+    @IBOutlet weak var lyricLabel: UILabel!
     
     
     var httpCtrl = HttpController()
@@ -183,11 +184,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let songName = getSongData(fromRow: row, andKey: "title")
         let songArtist = getSongData(fromRow: row, andKey: "artist")
-        Lyc.manager.cacheLyc(songName!, artist: songArtist!)
+        LyricManager.instance.cacheLyc(songName!, artist: songArtist!)
     }
     
     func onTimer() {
-        
         let time = audioPlayer.currentPlaybackTime
         let totalTime = audioPlayer.duration
         if time > 0.0 && totalTime > 0{
@@ -199,8 +199,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let percentage = CGFloat(time / totalTime)
             progress.frame.size.width = view.frame.size.width * percentage
+            
+            let lyric = LyricManager.instance.current?.getContent(minute: minute, second: second)
+            if lyric != nil {
+                lyricLabel.text = lyric
+            }
         } else {
             timeLabel.text = "00:00"
+            lyricLabel.text = ""
         }
     }
     

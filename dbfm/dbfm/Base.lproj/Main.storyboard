@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iJ-no-Mf8">
-                                <rect key="frame" x="139" y="119" width="43" height="21"/>
+                                <rect key="frame" x="139" y="119" width="43" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -191,6 +191,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TX-Fb-dnU">
+                                <rect key="frame" x="16" y="226" width="288" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -214,9 +220,12 @@
                             <constraint firstItem="6Hf-MP-oiJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="M0M-un-lga"/>
                             <constraint firstItem="rmr-ab-0rc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="MtD-nN-hwJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Hf-MP-oiJ" secondAttribute="trailing" constant="-16" id="Na0-cT-Fqa"/>
+                            <constraint firstItem="8TX-Fb-dnU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="OLU-1C-U44"/>
                             <constraint firstItem="mkx-DN-dH6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="274" id="Pue-s5-bBM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MvR-YR-ZJ6" secondAttribute="trailing" constant="125" id="QJF-EO-ZVf"/>
                             <constraint firstItem="Gy8-OP-RlQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="276" id="QMV-Pc-Nb8"/>
+                            <constraint firstItem="8TX-Fb-dnU" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="QZe-Ia-SWX"/>
+                            <constraint firstItem="8TX-Fb-dnU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="206" id="QjR-4f-N6v"/>
                             <constraint firstItem="UaX-Bg-m7n" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="235" id="RGn-Oc-GEk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mkx-DN-dH6" secondAttribute="trailing" constant="-11" id="S1U-MB-Hu8"/>
                             <constraint firstItem="rmr-ab-0rc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="235" id="Sdh-La-2zc"/>
@@ -269,6 +278,7 @@
                     <connections>
                         <outlet property="bg" destination="6Hf-MP-oiJ" id="Xx6-cP-ena"/>
                         <outlet property="iv" destination="5PN-oe-2Ba" id="mIE-kT-gfI"/>
+                        <outlet property="lyricLabel" destination="8TX-Fb-dnU" id="u08-Rm-iUg"/>
                         <outlet property="orderButton" destination="rmr-ab-0rc" id="eCg-wv-2QB"/>
                         <outlet property="playButton" destination="MvR-YR-ZJ6" id="bQL-A0-k5v"/>
                         <outlet property="progress" destination="F9N-jY-i1z" id="SwS-YN-gjA"/>
@@ -278,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="-189"/>
+            <point key="canvasLocation" x="-523" y="-273"/>
         </scene>
         <!--Channel Controller-->
         <scene sceneID="2fQ-M0-oob">
@@ -334,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OqT-sf-fSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93" y="-168"/>
+            <point key="canvasLocation" x="-200" y="-273"/>
         </scene>
     </scenes>
     <resources>

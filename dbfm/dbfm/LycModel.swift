@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
     func substr(pos: Int, len: Int = 0) -> String {
-        if count(self) <= pos {
+        if pos + len > count(self) {
             return ""
         }
         let start = advance(self.startIndex, pos)
@@ -47,50 +47,87 @@ extension String {
     }
 }
 
-struct Lyc {
-    static let manager = LycManager.sharedInstance
-    
-    var ti = ""
-    var ar = ""
-    var al = ""
-    var by = ""
+
+class Lyric {
+    var ti:String = ""
+    var ar: String = ""
+    var al: String = ""
+    var by: String = ""
     var content: [String:String] = [:]
     
     init(data: String) {
         let arr = data.split("\r\n")
         for (index, str) in enumerate(arr) {
+            var notFind = false
             if index < 4 {
+                let num = count(str) - 5
                 if str.find("ti:") != nil {
-                    ti = str.substr(4, len: count(str) - 5)
+                    ti = (num <= 0) ? "" : str.substr(4, len: num)
                 } else if str.find("ar:") != nil {
-                    ar = str.substr(4, len: count(str) - 5)
+                    ar = (num <= 0) ? "" : str.substr(4, len: num)
                 } else if str.find("al:") != nil {
-                    al = str.substr(4, len: count(str) - 5)
+                    al = (num <= 0) ? "" : str.substr(4, len: num)
                 } else if str.find("by:") != nil {
-                    by = str.substr(4, len: count(str) - 5)
+                    by = (num <= 0) ? "" : str.substr(4, len: num)
+                } else {
+                    notFind = true
                 }
             } else {
-                let key = str.substr(1, len: 8)
-                let value = str.substr(10)
-                content[key] = value
+                notFind = true
+            }
+            
+            if notFind {
+                var start = str.find("[")
+                var end = str.findLast("]")
+                if start == nil || end == nil {
+                    return
+                }
+                
+                var key = str.substr(1, len: end! - 1)
+                var value = str.substr(end! + 1)
+                if count(key) < 8 {
+                    return
+                }
+                
+                if key.find("][") != nil {
+                    let keys = key.split("][")
+                    for item in keys {
+                        if count(item) >= 8 {
+                            let tm = item.substr(0, len: 5)
+                            if !tm.isEmpty {
+                                content[tm] = value
+                            }
+                        }
+                    }
+                } else {
+                    key = key.substr(0, len: 5)
+                    if !key.isEmpty {
+                        content[key] = value
+                    }
+                }
             }
         }
     }
     
-    func getContentFrom(#minute: Int, second: Int) -> String? {
-        let key = NSString(format: "%02d:%02d.00", minute, second) as String
-        return content[key]
+    func getContent(#minute: Int, second: Int) -> String? {
+        let key = NSString(format: "%02d:%02d", minute, second) as String
+        return self.content[key]
     }
 }
 
-class LycManager {
-    internal static let sharedInstance: LycManager = {
-        return LycManager()
-    } ()
+class LyricManager {
+    class var instance: LyricManager {
+        struct Static {
+            static let instance = LyricManager()
+        }
+        return Static.instance
+    }
     
-    var lycs:[String:Lyc] = [:]
+    var data: [String:Lyric] = [:]
+    var current: Lyric?
     
     func cacheLyc(song: String, artist: String) {
+        current = nil
         let url = "http://geci.me/api/lyric/\(song)/\(artist)"
         let utf8url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         if utf8url == nil {
@@ -110,11 +147,11 @@ class LycManager {
             
             for item in result! {
                 let lrc = item["lrc"].string
-                if let lrc_ = lrc {
-                    if self.lycs.indexForKey(lrc_) != nil {
+                if lrc != nil {
+                    if self.data.indexForKey(lrc!) != nil {
                         break
                     }
-                    self.cacheLyc(lrc_)
+                    self.cacheLyc(lrc!)
                     break
                 }
             }
@@ -122,14 +159,12 @@ class LycManager {
     }
     
     func cacheLyc(url: String) {
-        if lycs.indexForKey(url) == nil {
+        if data.indexForKey(url) == nil {
             Alamofire.manager.request(.GET, url, parameters: nil).responseString(encoding:NSUTF8StringEncoding, completionHandler: {
                 (request, response, data, error) in
-                if let data_ = data {
-                    self.lycs.updateValue(Lyc(data: data_), forKey: url)
-                }
+                let url = request.URL?.absoluteString
+                self.current = Lyric(data: data!)
             })
         }
     }
-    
 }
