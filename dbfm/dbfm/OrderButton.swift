@@ -14,7 +14,7 @@ enum Order: Int {
     case Cycle
     case Unknown
 }
-
+xxxx
 class OrderButton: UIButton {
     var order = Order.Sequence
     
